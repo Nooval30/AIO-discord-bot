@@ -1,17 +1,23 @@
-# Discord Bot
+# AIO Discord Bot
 
-Bot Discord modular berbasis `discord.py`. Fitur pertama: **Welcome & Goodbye message**.
+Bot Discord modular berbasis `discord.py`. All-in-one, tinggal nambah fitur baru kapan aja.
+
+## Fitur Saat Ini
+
+-  **Welcome & Goodbye** — kirim embed otomatis pas member join/leave server
+-  **Musik Player** — search lagu by judul atau paste link YouTube, download otomatis, play/pause/skip/stop/queue
 
 ## Struktur
 
 ```
-discord-bot/
+AIO-discord-bot/
 ├── main.py           # entry point, auto-load semua cog
 ├── config.py         # baca konfigurasi dari .env
 ├── requirements.txt
 ├── .env.example       # contoh isi .env
 └── cogs/
-    └── welcome.py     # fitur welcome & goodbye
+    ├── welcome.py     # fitur welcome & goodbye
+    └── music.py       # fitur musik player
 ```
 
 Tiap fitur baru = file baru di folder `cogs/`. Gak perlu edit `main.py`.
@@ -21,44 +27,39 @@ Tiap fitur baru = file baru di folder `cogs/`. Gak perlu edit `main.py`.
 1. **Buat bot di Discord Developer Portal**
    - Buka https://discord.com/developers/applications → New Application
    - Bot tab → Add Bot → copy token
-   - Di tab "Bot", aktifkan **Server Members Intent** dan **Message Content Intent** (bagian Privileged Gateway Intents) — wajib buat fitur welcome/goodbye
+   - Aktifin **Server Members Intent** dan **Message Content Intent** (Privileged Gateway Intents) — wajib
 
 2. **Install dependency**
    ```bash
-   pip install -r requirements.txt
+   python -m pip install -r requirements.txt
    ```
 
-3. **Setup config**
+3. **Install FFmpeg** (dibutuhin buat fitur musik)
+   - Download dari https://www.gyan.dev/ffmpeg/builds/ atau `winget install ffmpeg`
+   - Cek lokasi `ffmpeg.exe` di laptop lo, isi ke `FFMPEG_EXECUTABLE` di `cogs/music.py`
+
+4. **Setup config**
    - Copy `.env.example` jadi `.env`
    - Isi `DISCORD_TOKEN` dengan token bot lo
-   - Aktifkan Developer Mode di Discord (Settings → Advanced), lalu klik kanan channel yang mau dipake buat welcome/goodbye → Copy Channel ID
-   - Isi `WELCOME_CHANNEL_ID` dan `GOODBYE_CHANNEL_ID`
+   - Isi `WELCOME_CHANNEL_ID` dan `GOODBYE_CHANNEL_ID` (aktifin Developer Mode di Discord buat copy channel ID)
 
-4. **Invite bot ke server**
-   - Di Developer Portal → OAuth2 → URL Generator
-   - Centang scope `bot`, permission minimal: `Send Messages`, `Embed Links`, `View Channel`
-   - Buka URL yang di-generate, pilih server lo
+5. **Invite bot ke server**
+   - Developer Portal → OAuth2 → URL Generator
+   - Scope `bot`, permission: `Send Messages`, `Embed Links`, `View Channel`, `Connect`, `Speak`
 
-5. **Jalankan bot**
+6. **Jalankan bot**
    ```bash
    python main.py
    ```
 
-## Nambah Fitur Baru
+## Command
 
-Bikin file baru di `cogs/`, contoh `cogs/moderasi.py`, dengan pola:
-
-```python
-from discord.ext import commands
-
-class NamaFitur(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
-    # command atau listener di sini
-
-async def setup(bot):
-    await bot.add_cog(NamaFitur(bot))
-```
-
-Restart bot, otomatis ke-load.
+**Musik**
+| Command | Alias | Fungsi |
+|---|---|---|
+| `!play <judul/link>` | `!p` | Cari & muter lagu |
+| `!skip` | | Skip ke lagu berikutnya |
+| `!pause` | | Jeda lagu |
+| `!resume` | | Lanjutin lagu |
+| `!stop` | | Berhenti, bot keluar voice channel |
+| `!queue` | `!q` | Liat antrian lagu |
