@@ -1,6 +1,6 @@
 # AIO Discord Bot
 
-Bot Discord modular berbasis `discord.py`. All-in-one, tinggal nambah fitur baru kapan aja.
+Bot Discord modular berbasis `python`. All-in-one, tinggal nambah fitur baru kapan aja.
 
 ## Fitur Saat Ini
 
