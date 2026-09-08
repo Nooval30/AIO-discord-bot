@@ -40,7 +40,7 @@ Tiap fitur baru = file baru di folder `cogs/`. Gak perlu edit `main.py`.
 
 4. **Setup config**
    - Copy `.env.example` jadi `.env`
-   - Isi `DISCORD_TOKEN` dengan token bot lo
+   - Isi `DISCORD_TOKEN` dengan token bot kamu
    - Isi `WELCOME_CHANNEL_ID` dan `GOODBYE_CHANNEL_ID` (aktifin Developer Mode di Discord buat copy channel ID)
 
 5. **Invite bot ke server**
