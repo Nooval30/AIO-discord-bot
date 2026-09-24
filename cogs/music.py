@@ -1,8 +1,3 @@
-"""
-Cog: Music Player
-Search lagu by judul -> download audio ke file sementara -> play dari file lokal.
-Pendekatan ini lebih stabil dibanding streaming langsung dari URL YouTube.
-"""
 import asyncio
 import os
 import discord
