@@ -115,7 +115,7 @@ class Music(commands.Cog):
             ctx.voice_client.stop()
             await ctx.send("⏭️ Lagu di-skip.")
         else:
-            await ctx.send("❌ Gak ada lagu yang lagi diputer.")
+            await ctx.send("Tidak ada lagu yang lagi diputer.")
 
     @commands.command(name="pause")
     async def pause(self, ctx: commands.Context):
@@ -128,8 +128,8 @@ class Music(commands.Cog):
 
     @commands.command(name="resume")
     async def resume(self, ctx: commands.Context):
-        """Lanjutin lagu yang di-pause."""
-        if ctx.voice_client and ctx.voice_client.is_paused():
+        """Melanjutkan lagu yang di-pause."""
+        if ctx.voicte_client and ctx.voice_client.is_paused():
             ctx.voice_client.resume()
             await ctx.send("▶️ Lagu dilanjutin.")
         else:
